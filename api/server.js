@@ -22,8 +22,13 @@ var checkRateLimit = require('./../lib/rate-limit')(process.env.CORSANYWHERE_RAT
 var cors_proxy = require('./../lib/cors-anywhere');
 
 module.exports = (req, res) => {
+    // Vérifie si la requête est de type OPTIONS (pré-vérification CORS)
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end(); // Retourne un statut 200 avec une réponse vide
+    }
+
     // Extraire l'URL cible à partir de la requête pour `cors-anywhere`.
-    req.url = req.url.replace('/api/server/', '/');
+    req.url = decodeURIComponent(req.url.replace('/api/server/', '/'));
 
     cors_proxy.createServer({
         originBlacklist: originBlacklist,
