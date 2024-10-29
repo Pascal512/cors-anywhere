@@ -17,9 +17,9 @@ function parseEnvList(env) {
 }
 
 // Set up rate-limiting to avoid abuse of the public CORS Anywhere server.
-var checkRateLimit = require('./lib/rate-limit')(process.env.CORSANYWHERE_RATELIMIT);
+var checkRateLimit = require('./../lib/rate-limit')(process.env.CORSANYWHERE_RATELIMIT);
 
-var cors_proxy = require('./lib/cors-anywhere');
+var cors_proxy = require('./../lib/cors-anywhere');
 
 exports.handler = (event, context) => {
     return new Promise((resolve, reject) => {
