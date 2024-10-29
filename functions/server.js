@@ -23,6 +23,12 @@ var cors_proxy = require('./../lib/cors-anywhere');
 
 exports.handler = (event, context) => {
     return new Promise((resolve, reject) => {
+        // Extraire l'URL cible depuis le chemin d'URL.
+        const targetUrl = event.path.replace('/.netlify/functions/server/', '');
+
+        // Créer une fausse requête pour passer l'URL cible.
+        event.url = `/${targetUrl}`;
+
         cors_proxy.createServer({
             originBlacklist: originBlacklist,
             originWhitelist: originWhitelist,
