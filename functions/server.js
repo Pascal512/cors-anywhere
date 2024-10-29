@@ -49,6 +49,13 @@ exports.handler = (event, context) => {
             },
         }).listen(port, host, function() {
             console.log('Running CORS Anywhere on ' + host + ':' + port);
+        }).emit('request', event, {
+            end: (response) => resolve({
+                statusCode: response.statusCode || 200,
+                headers: response.headers,
+                body: response.body,
+            }),
+            setHeader: () => {}, // Nécessaire car les fonctions Netlify n'ont pas directement de méthode setHeader
         });
     });
 };
