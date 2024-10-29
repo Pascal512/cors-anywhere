@@ -54,7 +54,7 @@ exports.handler = (event, context) => {
               xfwd: false,
             },
         }).listen(port, host, function() {
-            console.log('Running CORS Anywhere on ' + host + ':' + port);
+            console.log('Running CORS (for Netlify) Anywhere on ' + host + ':' + port);
         }).emit('request', event, {
             end: (response) => resolve({
                 statusCode: response.statusCode || 200,
