@@ -28,7 +28,7 @@ module.exports = (req, res) => {
     }
 
     // Extraire l'URL cible à partir de la requête pour `cors-anywhere`.
-    req.url = decodeURIComponent(req.url.replace('/api/server?url=', ''));
+    req.url = decodeURIComponent(req.url.replace('/api/server?url', ''));
 
     cors_proxy.createServer({
         originBlacklist: originBlacklist,
