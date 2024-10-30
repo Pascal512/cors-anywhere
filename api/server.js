@@ -22,6 +22,12 @@ var checkRateLimit = require('./../lib/rate-limit')(process.env.CORSANYWHERE_RAT
 var cors_proxy = require('./../lib/cors-anywhere');
 
 module.exports = (req, res) => {
+    // Autorise les requêtes de toutes les origines
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    
+    // Autorise les en-têtes courants (optionnel)
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
     // Vérifie si la requête est de type OPTIONS (pré-vérification CORS)
     if (req.method === 'OPTIONS') {
         return res.status(200).end(); // Retourne un statut 200 avec une réponse vide
