@@ -69,7 +69,10 @@ textarea {
   var cors_api_url = 'https://cors-anywhere-9ftu.vercel.app/api/server?url=';
   function doCORSRequest(options, printResult) {
     var x = new XMLHttpRequest();
-    x.open(options.method, cors_api_url + options.url);
+    x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    x.setRequestHeader('Origin', window.location.origin);
+    //x.open(options.method, cors_api_url + options.url);
+    x.open(options.method, cors_api_url + encodeURIComponent(options.url));
     x.onload = x.onerror = function() {
       printResult(
         options.method + ' ' + options.url + '\n' +
