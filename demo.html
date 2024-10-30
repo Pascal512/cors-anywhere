@@ -72,7 +72,6 @@ textarea {
     //x.open(options.method, cors_api_url + options.url);
     x.open(options.method, cors_api_url + encodeURIComponent(options.url));
     x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    x.setRequestHeader('Origin', window.location.origin);
     x.onload = x.onerror = function() {
       printResult(
         options.method + ' ' + options.url + '\n' +
